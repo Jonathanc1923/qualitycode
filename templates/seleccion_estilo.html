@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seleccione un estilo para su fotografía</title>
 
@@ -10,62 +11,19 @@
             font-family: 'Arial', sans-serif;
             background-color: #f2f2f2;
             margin: 0;
-            padding: 0;
+            padding-top: 70px; /* Altura del menú fijo */
             text-align: center;
-        }
-
-        /* Ajustes generales para el tamaño de las imágenes en computadoras */
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-        }
-        
-        /* Ajustes para pantallas más pequeñas */
-        @media only screen and (max-width: 600px) {
-            title2 {
-                font-size: 1.5em;
-            }
-        
-            a {
-                padding: 8px;
-                margin: 8px;
-            }
-        
-            .image-container img {
-                max-width: 90%;
-            }
-        }
-        title2 {
-            font-size: 2em;
-            font-weight: bold;
-            margin-bottom: 20px;
-            animation: titleAnimation 5s ease infinite alternate;
-            color: #00ff00;
-        }
-
-        @keyframes titleAnimation {
-            0% {
-                color: #00ff00;
-                font-size: 1.5em;
-            }
-            50% {
-                color: #ff00ff;
-                font-size: 1.5em;
-            }
-            100% {
-                color: #00ff00;
-                font-size: 1.5em;
-            }
         }
 
         h1 {
             color: #145;
+            margin-top: 20px;
         }
 
         a {
             display: block;
-            padding: 10px;
-            margin: 10px;
+            padding: 10px; /* Tamaño de botón más pequeño */
+            margin: 8px;
             text-decoration: none;
             color: #fff;
             background-color: #3498db;
@@ -77,66 +35,42 @@
             background-color: #2980b9;
         }
 
-        .image-container img {
-            max-width: 50%;
-            height: auto;
-            margin: 2px;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .fade-in-out {
-            animation: fadeInOut 2s ease-in-out infinite;
-        }
-
-        @keyframes fadeInOut {
-            0%, 100% {
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-        }
-
         /* Ajustes para pantallas más pequeñas */
         @media only screen and (max-width: 600px) {
-            title2 {
+            body {
+                padding-top: 20px; /* Ajuste de espacio en dispositivos móviles */
+            }
+
+            h1 {
                 font-size: 1.5em;
+                margin-top: 10px;
             }
 
             a {
-                padding: 8px;
-                margin: 8px;
+                padding: 8px; /* Tamaño de botón más pequeño */
+                width: 80%; /* Ajuste de ancho para mejorar adaptabilidad */
+                margin: 10px auto; /* Centrar en dispositivos móviles */
             }
 
-            .image-container img {
-                max-width: 90%;
-            }
             #video-container {
-                margin: 20px auto; /* Centrar el contenedor del video en todos los dispositivos */
-                overflow: hidden;
-                width: 70%;
-                max-width: 800px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                width: 90%; /* Ajuste de ancho para mejorar adaptabilidad */
+                margin: 0 auto; /* Centrar en dispositivos móviles */
             }
-    
+
             #youtube-video {
-                width: 100%;
-                height: 100%;
+                width: 100%; /* Hacer que el video sea completamente responsivo */
+                height: 300px; /* Ajuste de altura para un video más grande */
             }
         }
     </style>
 </head>
 <body>
-    <h1>Professional Pic - Seleccione un estilo para su fotografía</h1>
+    {% include 'menu.html' %}
+    <h1>Propicart - Seleccione un estilo para su fotografía</h1>
     <h1>IMPORTANTE: Vea el siguiente video explicativo</h1>
     <div id="video-container">
         <iframe
             id="youtube-video"
-            width="500"
-            height="290"
             src="https://www.youtube.com/embed/Yk5lh2xTk8E?si=GSz7tW8md43MH0Av"
             frameborder="0"
             allowfullscreen
@@ -147,6 +81,5 @@
     <a href="{{ url_for('disenos_una_persona3') }}">Diseños para 3 personas</a>
     <a href="{{ url_for('disenos_una_persona4') }}">Diseños para 4 personas</a>
     <a href="{{ url_for('disenos_una_persona5') }}">Diseños para 5 personas</a>
-    
 </body>
 </html>

@@ -255,7 +255,7 @@ def imagen_final():
         result_image = os.path.join(static_dir, latest_file)
         return render_template('imagen_final.html', result_image=result_image_name)
     else:
-        return "ERROR: Los rostros no fueron cargados o no esperaste a que el sistema los cargue - Recuerda que antes de seleccionar un diseño debes cargar correctamente las caras de las personas tal como se indica en el video de inicio de la plataforma! Si no sigues los pasos detallados no obtendrás buenos resultados. Regresa al inicio y mira el video explicativo de como cargar los rostros y obtener los diseños"
+        return " En 15 segundos Actualiza o recarga esta página sin cerrarla - ERROR: Los rostros no fueron cargados o no esperaste a que el sistema los cargue - Recuerda que antes de seleccionar un diseño debes cargar correctamente las caras de las personas tal como se indica en el video de inicio de la plataforma! Si no sigues los pasos detallados no obtendrás buenos resultados."
     
     
     
@@ -401,6 +401,15 @@ def disenos_una_persona5():
     return render_template('galeria5.html', image_paths=image_paths, imfondo=imfondo_path)
 
 
+@app.route('/terminos')
+def terminos():
+    return render_template('terminos.html')
+
+@app.route('/comprar')
+def comprar():
+    return render_template('comprar.html')
+
+
 
 
 @app.route('/procesar', methods=['POST'])
@@ -424,10 +433,6 @@ def procesar():
     
     
     shutil.copy2(imfondo_path, ruta_destino)
-    
-    
-    
-    
     img = cv2.imread(imfondo_path)
 
     if img is None:

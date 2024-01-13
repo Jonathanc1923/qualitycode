@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprar paquete de 10 diseños por $5.5 USD</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        #comprar-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.4s ease;
+            cursor: pointer;
+        }
+
+        #comprar-btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Comprar paquete de 10 diseños con 50% de descuento</h1>
+
+    <p>Incluye:</p>
+    <p>- 10 diseños fotográficos finales</p>
+    <p>- Diseños de 1 a 5 personas</p>
+    <p>- Temáticas familiares e individuales</p>
+    <p>El servicio está sujeto a términos y condiciones detallados en <a href="www.propicart.com/terminos" target="_blank">www.propicart.com/terminos</a></p>
+
+    <h1>Guarda comprobante de tu pago y comunícate con un asesor al WhatsApp +51 900150496</h1>
+
+    <!-- Inserta el script de pago proporcionado -->
+    <a id="comprar-btn" href="#" onclick="comprar()">Comprar paquete de 10 diseños por $5.5 USD</a>
+
+    <script data-reference-id="2c74616b-347f-4688-82f1-2c178a8edaa0">
+        const s = document.createElement("script");
+        s.src = "https://static.dlocalgo.com/dlocalgo.min.js";
+        s.async = true;
+        document.body.appendChild(s);
+        s.addEventListener("load", () => {
+            const e = document.querySelector('script[data-reference-id="2c74616b-347f-4688-82f1-2c178a8edaa0"]');
+            const t = e.parentNode;
+            const n = "dp-btn-2c74616b-347f-4688-82f1-2c178a8edaa0";
+            const c = document.createElement("div");
+            c.id = n;
+            t.insertBefore(c, e);
+
+            // Modificar el código para abrir en una nueva ventana
+            const checkoutButton = new DlocalGo("ErBBXymIZRMMuoXJmplpgKaGckEalbkV").createCheckout(n, {
+                subType: "BUTTON",
+                country: "",
+                currency: "USD",
+                amount: "5.5",
+                lang: "",
+                text: "Comprar paquete de 10 diseños"
+            });
+
+            window.comprar = function () {
+                window.open(checkoutButton.href, '_blank', 'height=600,width=800');
+            };
+        });
+    </script>
+</body>
+</html>
