@@ -56,20 +56,46 @@
     <h1>Resultado del Proceso</h1>
 
     {% if result_image %}
-        <h2>Imagen Resultante:</h2>
-        <div class="result-image-container">
-            <p>Actualice hasta que aparezcan los rostros como usted los encargó. En caso de no visualizar todos los rostros, actualiza la página sin cerrarla. Descarga la imagen para no perderla.</p>
-            <p>Descargue la imagen ahora, nosotros no la guardaremos.</p>
-            <!-- Agregar el botón de descarga -->
-            <a class="download-button" href="{{ url_for('static', filename=result_image) }}" download="result_image.jpg">Descargar Imagen</a>
+    <h2>Imagen Resultante:</h2>
+    <div class="result-image-container">
+        <!-- Tamaño fijo del contenedor de la imagen resultante -->
+        <div style="width: 300px; height: 300px; overflow: hidden; margin: 10px auto;">
+            <img class="result-image" src="{{ url_for('static', filename=result_image) }}" alt="Result Image">
+        </div>
+
+        <!-- Botón para descargar la imagen resultante original -->
+        <a class="download-button" href="{{ url_for('static', filename=result_image) }}" download="result_image_original.jpg">Descargar Imagen Original</a>
+
+        <!-- Nueva sección para el fotocalendario -->
+        <h2>Fotocalendario:</h2>
+        <div class="calendar-image-container">
             
 
-            <!-- Tamaño fijo del contenedor de la imagen -->
-            <div style="width: 300px; height: 300px; overflow: hidden; margin: 10px auto;">
-                <img class="result-image" src="{{ url_for('static', filename=result_image) }}" alt="Result Image">
+            <!-- Tamaño fijo del contenedor del fotocalendario -->
+            <div style="width: 1000px; height: 1000px; overflow: hidden; margin: 10px auto;">
+                <img class="calendar-image" src="{{ url_for('static', filename='resultado_con_calendario.jpg') }}" alt="Resultado con Fotocalendario">
             </div>
+            <!-- Agregar el botón de descarga para el fotocalendario -->
+            <a class="download-button" href="{{ url_for('static', filename='calendario.png') }}" download="fotocalendario.png">Descargar Fotocalendario</a>
+            
+            
         </div>
-    {% else %}
+
+        <h2>Recuerdo Mes del Amor:</h2>
+        <div class="san-valentin-image-container">
+            <!-- Tamaño fijo del contenedor del fotocalendario -->
+            <div style="width: 1000px; height: 1000px; overflow: hidden; margin: 10px auto;">
+                <img class="amor-image" src="{{ url_for('static', filename='resultado_con_san_valentin.jpg') }}" alt="Resultado mes del amor">
+            </div>
+            <!-- Agregar el botón de descarga para la postal de San Valentín -->
+            <a class="download-button" href="{{ url_for('static', filename='resultado_con_san_valentin.jpg') }}" download="recuerdo_mes_del_amor.jpg">Descargar Recuerdo Mes del Amor</a>
+
+        
+        </div>
+
+</div>
+    </div>
+{% else %}
         <p>Actualice hasta que aparezcan los rostros como usted los encargó. Por ahora no hay imagen resultante disponible.</p>
     {% endif%}
 

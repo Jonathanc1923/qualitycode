@@ -510,11 +510,57 @@ def procesar():
     print(f"Carpeta eliminada exitosamente.")
     print(session)
     
+    # Obtener la ruta de la imagen del fotocalendario
+    calendario_path = os.path.join('static', 'calendario.png')
 
-    # Pasar la variable unique_number al template
-    return render_template('imagen_final.html', result_image=unique_name, unique_name=unique_name)
+    # Crear una copia de la imagen resultante para no sobrescribir la original
+    img_resultante = cv2.imread(result_image)
+    img_resultante_copy = img_resultante.copy()
+
+    # Redimensionar la imagen del fotocalendario al tamaño deseado (1000x1000 px)
+    calendario = cv2.imread(calendario_path)
+    calendario_resized = cv2.resize(calendario, (1000, 1000))
+
+    # Obtener el espacio central en el fotocalendario para incrustar la imagen resultante
+    centro_x = int((1000 - 500) / 2)
+    centro_y = int((1000 - 500) / 2)
+
+    # Incrustar la imagen resultante en el fotocalendario
+    calendario_resized[centro_y:centro_y + 500, centro_x:centro_x + 500] = img_resultante_copy
+
+    # Guardar la nueva imagen resultante con el fotocalendario
+    resultado_con_calendario_path = os.path.join('static', 'resultado_con_calendario.jpg')
+    cv2.imwrite(resultado_con_calendario_path, calendario_resized)
+    
+    # Obtener la ruta de la imagen de la postal de San Valentín
+    san_valentin_path = os.path.join('static', 'amor.png')
+
+    # Crear una copia de la imagen de la postal de San Valentín
+    san_valentin = cv2.imread(san_valentin_path)
+    san_valentin_copy = san_valentin.copy()
+
+    # Redimensionar la imagen resultante al tamaño deseado (500x500 px)
+    img_resultante = cv2.imread(result_image)
+    img_resultante_resized = cv2.resize(img_resultante, (500, 500))
+
+    # Obtener la posición central en la postal de San Valentín para incrustar la imagen final
+    centro_x_san_valentin = int((1000 - 500) / 2)
+    centro_y_san_valentin = int((1000 - 500) / 2)
+
+    # Incrustar la imagen final en la postal de San Valentín
+    san_valentin_copy[centro_y_san_valentin:centro_y_san_valentin + 500, centro_x_san_valentin:centro_x_san_valentin + 500] = img_resultante_resized
+
+    # Guardar la nueva imagen resultante con la postal de San Valentín
+    resultado_con_san_valentin_path = os.path.join('static', 'resultado_con_san_valentin.jpg')
+    cv2.imwrite(resultado_con_san_valentin_path, san_valentin_copy)
 
 
+    
+    
+
+    # Devuelve la última imagen generada con el fotocalendario como resultado
+    unique_name = session['unique_name']
+    return render_template('imagen_final.html', result_image=unique_name, resultado_con_calendario_path=resultado_con_calendario_path, resultado_con_san_valentin_path=resultado_con_san_valentin_path, unique_name=unique_name)
 
 
 if __name__ == "__main__":
