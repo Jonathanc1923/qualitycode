@@ -50,6 +50,28 @@
         .result-image:hover {
             transform: scale(1.1);
         }
+
+        .calendar-image-container,
+        .san-valentin-image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .calendar-image,
+        .amor-image {
+            max-width: 100%;
+            max-height: 300px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .calendar-image:hover,
+        .amor-image:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -69,35 +91,27 @@
         <!-- Nueva sección para el fotocalendario -->
         <h2>Fotocalendario:</h2>
         <div class="calendar-image-container">
-            
-
             <!-- Tamaño fijo del contenedor del fotocalendario -->
-            <div style="width: 1000px; height: 1000px; overflow: hidden; margin: 10px auto;">
+            <div style="width: 300px; height: 300px; overflow: hidden; margin: 10px auto;">
                 <img class="calendar-image" src="{{ url_for('static', filename='resultado_con_calendario.jpg') }}" alt="Resultado con Fotocalendario">
             </div>
             <!-- Agregar el botón de descarga para el fotocalendario -->
             <a class="download-button" href="{{ url_for('static', filename='calendario.png') }}" download="fotocalendario.png">Descargar Fotocalendario</a>
-            
-            
         </div>
 
         <h2>Recuerdo Mes del Amor:</h2>
         <div class="san-valentin-image-container">
             <!-- Tamaño fijo del contenedor del fotocalendario -->
-            <div style="width: 1000px; height: 1000px; overflow: hidden; margin: 10px auto;">
+            <div style="width: 300px; height: 300px; overflow: hidden; margin: 10px auto;">
                 <img class="amor-image" src="{{ url_for('static', filename='resultado_con_san_valentin.jpg') }}" alt="Resultado mes del amor">
             </div>
             <!-- Agregar el botón de descarga para la postal de San Valentín -->
             <a class="download-button" href="{{ url_for('static', filename='resultado_con_san_valentin.jpg') }}" download="recuerdo_mes_del_amor.jpg">Descargar Recuerdo Mes del Amor</a>
-
-        
         </div>
-
-</div>
     </div>
-{% else %}
-        <p>Actualice hasta que aparezcan los rostros como usted los encargó. Por ahora no hay imagen resultante disponible.</p>
-    {% endif%}
+    {% else %}
+    <p>Actualice hasta que aparezcan los rostros como usted los encargó. Por ahora no hay imagen resultante disponible.</p>
+    {% endif %}
 
     <p><a href="{{ url_for('seleccion_estilo') }}" style="color: #007bff;">Volver a la página principal</a></p>
 </body>
