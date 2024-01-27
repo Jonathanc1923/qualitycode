@@ -74,7 +74,7 @@ except FileNotFoundError:
     codigos_validos = {}
 
 
-limite_validaciones = 16  # Establece el límite de validaciones permitidas
+limite_validaciones = 32  # Establece el límite de validaciones permitidas
 
 # Diccionario para almacenar la lista negra de códigos
 lista_negra = defaultdict(int)
@@ -509,7 +509,7 @@ def procesar():
     shutil.rmtree(os.path.join('uploads', codigouser))
     print(f"Carpeta eliminada exitosamente.")
     print(session)
-    
+    codigouser = session['codigouser']
     # Obtener la ruta de la imagen del fotocalendario
     calendario_path = os.path.join('static', 'calendario.png')
 
@@ -520,7 +520,7 @@ def procesar():
     # Redimensionar la imagen del fotocalendario al tamaño deseado (1000x1000 px)
     calendario = cv2.imread(calendario_path)
     calendario_resized = cv2.resize(calendario, (1000, 1000))
-
+    codigouser = session['codigouser']
     # Obtener el espacio central en el fotocalendario para incrustar la imagen resultante
     centro_x = int((1000 - 500) / 2)
     centro_y = int((1000 - 500) / 2)
@@ -542,7 +542,7 @@ def procesar():
     # Redimensionar la imagen resultante al tamaño deseado (500x500 px)
     img_resultante = cv2.imread(result_image)
     img_resultante_resized = cv2.resize(img_resultante, (500, 500))
-
+    codigouser = session['codigouser']
     # Obtener la posición central en la postal de San Valentín para incrustar la imagen final
     centro_x_san_valentin = int((1000 - 500) / 2)
     centro_y_san_valentin = int((1000 - 500) / 2)
