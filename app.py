@@ -17,6 +17,29 @@ import string
 import secrets
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
+from flask import Flask, render_template, request, jsonify, session
+import cv2
+import shutil
+from datetime import datetime
+import random
+import os
+from os.path import join
+from swapper import swapper
+import subprocess
+
+# Instalación y configuración de CodeFormer
+def install_codeformer():
+    subprocess.run(['git', 'clone', 'https://github.com/sczhou/CodeFormer.git'])
+    subprocess.run(['pip', 'install', '-r', 'CodeFormer/requirements.txt'])
+    subprocess.run(['python', 'CodeFormer/basicsr/setup.py', 'develop'])
+    subprocess.run(['python', 'CodeFormer/scripts/download_pretrained_models.py', 'facelib'])
+    subprocess.run(['python', 'CodeFormer/scripts/download_pretrained_models.py', 'CodeFormer'])
+
+# Instalar CodeFormer al iniciar la aplicación Flask
+install_codeformer()
+
+
+
 
 
 app = Flask(__name__)
@@ -412,6 +435,41 @@ def comprar():
 
 
 
+import subprocess
+
+def process_with_codeformer(input_path):
+    try:
+        CODEFORMER_FIDELITY = 0.8
+        BACKGROUND_ENHANCE = True
+        FACE_UPSAMPLE = True
+
+        # Ruta de salida para la imagen procesada (mismo lugar que la original)
+        output_path = input_path.replace('user_upload', 'user_upload_processed')
+
+        command = [
+            'python', '/content/CodeFormer/inference_codeformer.py',
+            '-w', str(CODEFORMER_FIDELITY),
+            '--input_path', input_path,
+            '--output_path', output_path,
+            '--bg_upsampler', 'realesrgan'
+        ]
+
+        if FACE_UPSAMPLE:
+            command.append('--face_upsample')
+
+        if BACKGROUND_ENHANCE:
+            command.append('--bg_upsampler')
+
+        subprocess.run(command, check=True)
+
+        return output_path  # Devuelve la ruta de la imagen procesada (reemplazando la original)
+
+    except subprocess.CalledProcessError as e:
+        print(f"Error en el proceso CodeFormer: {str(e)}")
+        return None
+
+
+
 @app.route('/procesar', methods=['POST'])
 def procesar():
    
@@ -498,6 +556,8 @@ def procesar():
         cv2.imwrite(output_path, img)
         print("UNIQUE NAME ES", unique_name)
         print(session)
+        if 'unique_name' in img_persona_path:
+            img_persona = process_with_codeformer(img_persona)
     
 
     # Devuelve la última imagen generada como resultado
