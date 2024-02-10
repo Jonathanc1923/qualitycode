@@ -24,7 +24,6 @@ from datetime import datetime
 import random
 import os
 from os.path import join
-import swapper
 import subprocess
 
 # Instalación y configuración de CodeFormer
