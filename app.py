@@ -24,7 +24,7 @@ from datetime import datetime
 import random
 import os
 from os.path import join
-from swapper import swapper
+import swapper
 import subprocess
 
 # Instalación y configuración de CodeFormer
@@ -438,6 +438,7 @@ def comprar():
 import subprocess
 
 def process_with_codeformer(input_path):
+    print("SE INICIO CODEFORME")
     try:
         CODEFORMER_FIDELITY = 0.8
         BACKGROUND_ENHANCE = True
@@ -447,7 +448,7 @@ def process_with_codeformer(input_path):
         output_path = input_path.replace('user_upload', 'user_upload_processed')
 
         command = [
-            'python', '/content/CodeFormer/inference_codeformer.py',
+            'python', 'CodeFormer/inference_codeformer.py',
             '-w', str(CODEFORMER_FIDELITY),
             '--input_path', input_path,
             '--output_path', output_path,
@@ -556,9 +557,8 @@ def procesar():
         cv2.imwrite(output_path, img)
         print("UNIQUE NAME ES", unique_name)
         print(session)
-        if 'unique_name' in img_persona_path:
-            img_persona = process_with_codeformer(img_persona)
-    
+        process_with_codeformer(output_path)
+        print("inicio de codeforme")
 
     # Devuelve la última imagen generada como resultado
     unique_name = unique_name
