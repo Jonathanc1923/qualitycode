@@ -1,0 +1,21 @@
+# Usa la imagen base de Python
+FROM python:3
+
+ENV PYTHONUNBUFFERED True
+ENV APP_HOME /app
+WORKDIR $APP_HOME
+
+
+
+# Copia el archivo de requisitos al contenedor
+COPY . ./
+
+# Instala las dependencias
+RUN pip install -r requirements.txt
+RUN pip install Flask gunicorn
+
+# Copia el contenido del directorio actual al contenedor en /app
+COPY . /app
+
+# Especifica el comando para ejecutar tu aplicación
+CMD exec gunicorn --bind :$PORT --workers 40 --threads 8 --timeout 100 app:app
